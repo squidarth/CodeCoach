@@ -1,5 +1,5 @@
-Template.postWorkspace.helpers({
+Template.filePage.helpers({
   currentWorkspace: function() {
-    return Workspaces.findOne(Session.get('currentPostId'));
+    return Workspaces.findOne(Session.get('currentWorkspaceId'));
   }
 });

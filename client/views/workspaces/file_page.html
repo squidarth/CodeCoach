@@ -1,0 +1,49 @@
+<template name="filePage">
+
+    <div id="file-modal" tabindex="-1" role="dialog" class="modal fade" data-backdrop="true">
+    <div class="modal-dialog">
+      <div class="modal-content"> 
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            >&times;</button>
+          <h4 class="modal-title">New File</h4>
+        </div>
+        <div class="modal-body">
+          <input name="fileName" id="fileNameInput" class="form-control input-sm" placeholder="myfile.py" /> 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button id="create-file-button" type="button" class="btn btn-primary">Create File</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 subtle-border">
+          <h3>{{workspace.name}}</h3>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Files</th>
+              </tr>
+            </thead>
+
+            {{#each files}}
+            <tr>
+              <td><a href="{{pathFor 'file' this}}">{{name}}</a></td>
+            </tr>
+            {{/each}}
+          </table> 
+
+          <button class="btn btn-primary new-file" data-toggle="modal" data-target="#file-modal">New File</button>
+        </div>
+        <div class="col-md-9">
+          <h3>{{name}}</h3> 
+        </div>
+      </div>
+
+    </div> 
+</template>
