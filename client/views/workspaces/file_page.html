@@ -19,31 +19,64 @@
     </div>
   </div>
 
-
     <div class="container">
       <div class="row">
-        <div class="col-md-3 subtle-border">
-          <h3>{{workspace.name}}</h3>
+        <div class="col-md-8"> 
+            <h3>{{workspace.name}}/{{name}}</h3>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Files <span class="caret"></span></button>
+              <ul class="dropdown-menu" role="menu">
+                {{#each files}}
+                  <li><a href="{{pathFor 'file' this}}">{{name}}</a></li>
+                  {{/each}}
+                  <li><a class="new-file" data-toggle="modal" data-target="#file-modal">New File</a></li>
+              </ul>
+          </div>
+        </div>
+
+      </div> 
+      <div class="row">
+        <div class="col-md-4 subtle-border">
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>Files</th>
+                <th>Hints</th>
               </tr>
             </thead>
-
-            {{#each files}}
+            {{#each hints}}
             <tr>
-              <td><a href="{{pathFor 'file' this}}">{{name}}</a></td>
-            </tr>
+              <td><a href="{{url}}">{{name}}</a></td>
+            </tr> 
+            {{/each}}
+
+            <tr>
+              <td><b>Code Samples</b></td>
+            </tr> 
+
+            {{#each code_samples}}
+              <tr>
+                <td><a href="{{url}}">{{name}}</a></td>
+              </tr> 
             {{/each}}
           </table> 
 
           <button class="btn btn-primary new-file" data-toggle="modal" data-target="#file-modal">New File</button>
         </div>
-        <div class="col-md-9">
-          <h3>{{name}}</h3> 
+        <div class="col-md-8">
+          <div class="row">
+            <textarea id="code-editor">{{code}}</textarea>
+          </div>
+          <div class="row interact-buttons"> 
+            <button type="submit" id="save-file-button" class="btn btn-primary">Save</button>
+            <button type="button" id="run-button" class="btn btn-default">Run</button>
+          </div>
+
+          <div class="row">
+            <textarea id="results-box" readonly="true">{{lastResults}}</textarea>
+          </div>
         </div>
       </div>
 
     </div> 
+    {{renderCodeEditor}}    
 </template>
