@@ -9,13 +9,6 @@ import code
 import re
 app = Flask(__name__)
 
-
-#def search_github(lib):
-#
-#
-#def search_stackoverflow(lib):
-
-
 @app.route("/ohloh", methods=["POST"])
 def ohloh():
   regex = re.compile("import (\S*)")
@@ -66,7 +59,7 @@ def command():
     tmp_filename = "%d.py" % random.randint(0, 9999999)
     f = open(tmp_filename, "w+")
     f.write("import modify_env\nmodify_env.modifyEnv()\n" + file_content)
-    process = Popen("python %s > log.out 2>&1" % tmp_filename, shell=True, stderr=PIPE, stdout=PIPE, bufsize=1)
+    process = Popen("python %s > /tmp/log.out 2>&1" % tmp_filename, shell=True, stderr=PIPE, stdout=PIPE, bufsize=1)
   else:
     return jsonify({"success": False, "error": "process already running"})
   return jsonify({"success": True})
@@ -90,7 +83,7 @@ def kill():
 
 @app.route("/getoutput")
 def get_output():
-  return jsonify({"success" : True, "output": open("log.out").read()})
+  return jsonify({"success" : True, "output": open("/tmp/log.out").read()})
 
 if __name__ == "__main__":
   global process
