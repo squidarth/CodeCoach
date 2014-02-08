@@ -20,7 +20,7 @@ def ohloh():
   urls = []
   for lib in match:
     match_regex = re.compile("file")
-    soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen("http://code.ohloh.net/search?s=import%20" + lib + "&pp=0&fl=Python&mp=1&ml=1&me=1&md=1&ff=1&filterChecked=true&format=json"))
+    soup = BeautifulSoup.BeautifulSoup(urllib2.urlopen("http://code.ohloh.net/search?s=\"import%20" + lib + "\"&pp=0&fl=Python&mp=1&ml=1&me=1&md=1&ff=1&filterChecked=true&format=json"))
 
     for b in soup.findAll('a'):
       if b.get('href') and match_regex.search(b['href']):
