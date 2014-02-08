@@ -1,11 +1,11 @@
 Files = new Meteor.Collection('files');
-
+Domain =  "http://ec2-184-72-141-86.compute-1.amazonaws.com:4000"
 if (Meteor.isServer) {
   Meteor.methods({
     getOhloh: function(fileId) {
       file = Files.findOne({_id: fileId});
       
-      result = Meteor.http.post("http://localhost:4000/ohloh", 
+      result = Meteor.http.post(Domain + "/ohloh", 
         {params: {contents: file.code}});
       
       return result; 
@@ -13,7 +13,7 @@ if (Meteor.isServer) {
     getStackOverflow: function(fileId) {
       file = Files.findOne({_id: fileId});
 
-      result = Meteor.http.post("http://localhost:4000/stackoverflow",
+      result = Meteor.http.post(Domain + "/stackoverflow",
         {params: {contents: file.code}});
 
       return result;
@@ -21,14 +21,14 @@ if (Meteor.isServer) {
     runCode: function(fileId) {
       file = Files.findOne({_id: fileId});
 
-      result = Meteor.http.post("http://localhost:4000/command",
+      result = Meteor.http.post(Domain+ "/command",
         {params: {contents: file.code}});
 
       return result;
     },
 
     getOutput: function(fileId) {
-      return Meteor.http.get("http://localhost:4000/getoutput");
+      return Meteor.http.get(Domain + "/getoutput");
     }
   });
 }
