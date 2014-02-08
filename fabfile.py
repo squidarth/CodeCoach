@@ -3,7 +3,7 @@ from time import gmtime, strftime
 
 env.hosts = ['ubuntu@ec2-184-72-141-86.compute-1.amazonaws.com']
 env.key_filename = '~/.ssh/rsaas-main.pem'
-git_clone = "git clone git@github.com:squidarth/codecoach.git"
+git_clone = "git clone git@github.com:squidarth/CodeCoach.git"
 active_dir_name = "~/source/current"
 
 def run_ls():
