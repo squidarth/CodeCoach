@@ -57,8 +57,9 @@ def command():
   if not process:
     file_content = request.form["contents"]
     tmp_filename = "/home/ubuntu/source/current/%d.py" % random.randint(0, 9999999)
-    f = open(tmp_filename, "w+")
-    f.write("import modify_env\nmodify_env.modifyEnv()\n" + file_content)
+    
+    with open(tmp_filename, "w+") as f:
+      f.write("import modify_env\nmodify_env.modifyEnv()\n" + file_content)
     process = Popen("python %s > /tmp/log.out 2>&1" % tmp_filename, shell=True, stderr=PIPE, stdout=PIPE, bufsize=1)
   else:
     return jsonify({"success": False, "error": "process already running"})
