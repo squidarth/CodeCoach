@@ -15,17 +15,15 @@ Router.map(function() {
   });
 
   this.route('workspace', {
-
     path: '/workspace/:_id',
-
+    waitOn: function() {
+      return [this.subscribe('workspaces'), this.subscribe('files')];
+    },
     before: [
-      function() {
-        this.subscribe('workspaces').wait();
-        this.subscribe('files').wait();
-      },
       function() {
         if (this.ready() ) {
         } else {
+          this.render('loading'); 
           this.stop();
         }
       }
